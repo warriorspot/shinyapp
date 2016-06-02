@@ -19,7 +19,8 @@ shinyUI(fluidPage(
   sidebarLayout (
     sidebarPanel(
       sliderInput("disp", "Displacement", 50, 500, value = 100, step = 5),
-      sliderInput("weight", "Weight", 1000, 5000, value = 2000, step = 100)
+      sliderInput("weight", "Weight", 1000, 5000, value = 2000, step = 100),
+      p("Manipulate the sliders above to produce a prediction")
     ),
     mainPanel(
       plotOutput("plot")
