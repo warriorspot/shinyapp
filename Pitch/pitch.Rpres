@@ -38,7 +38,7 @@ Visuals
 ```{r, echo=FALSE}
 m1 <- lm(mpg ~ disp, data=mtcars)
 m2 <- lm(mpg ~ wt, data=mtcars)
-plot(mtcars$disp, mtcars$mpg, xlab="Displacement", ylab="MPG", main="MPG by Displcament")
+plot(mtcars$disp, mtcars$mpg, xlab="Displacement", ylab="MPG", main="MPG by Displacement")
 abline(m1)
 plot(mtcars$wt,  mtcars$mpg, xlab="Weight (/1000)", ylab="MPG", main="MPG by Weight")
 abline(m2)
