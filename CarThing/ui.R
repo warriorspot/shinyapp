@@ -9,20 +9,17 @@
 
 library(shiny)
 
-# Define UI for application that draws a histogram
 shinyUI(fluidPage(
   
-  # Application title
-  titlePanel("Predict MPG by displacement and weigth"),
-  
-  # Sidebar with a slider input for number of bins 
-  sidebarLayout(
-    sidebarPanel(
-    ),
-    
-    # Show a plot of the generated distribution
+  verticalLayout(
+    titlePanel("Predict MPG by displacement and weight"),
     mainPanel(
-       plotOutput("distPlot")
-    )
-  )
+      align="center",
+      plotOutput("plot")
+    ),
+    sidebarPanel(
+      width=200,
+      sliderInput("disp", "Displacement", 50, 500, value = 100, step = 5),
+      sliderInput("weight", "Weight", 1000, 5000, value = 2000, step = 100)
+    ))
 ))
