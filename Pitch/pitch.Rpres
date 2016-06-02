@@ -20,16 +20,58 @@ engine displacement (cu. inches).
 Methodology
 ========================================================
 
-A linear regression model was created using the 
+A linear regression model was created using the data extracted from the 1974 Motor Trend US magazine, 
+and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles.<br><br>
+Example (showing only MPG, displacement, and weight):
 ```{r echo=FALSE}
 data <- mtcars[,c("mpg", "disp", "wt")]
 data$wt <- 1000 * data$wt
 head(data)
+
 ```
 
-Slide With Plot
+
+
+Visuals
 ========================================================
 
 ```{r, echo=FALSE}
-plot(cars)
+m1 <- lm(mpg ~ disp, data=mtcars)
+m2 <- lm(mpg ~ wt, data=mtcars)
+plot(mtcars$disp, mtcars$mpg, xlab="Displacement", ylab="MPG", main="MPG by Displcament")
+abline(m1)
+plot(mtcars$wt,  mtcars$mpg, xlab="Weight (/1000)", ylab="MPG", main="MPG by Weight")
+abline(m2)
 ```
+
+These plots demonstrate a clear relationship between weight, displacement, and MPG.
+
+Model
+========================================================
+The model was built using Leave One Out cross validation:
+
+```{r}
+library(caret)
+tc <- trainControl(method="LOOCV")
+m <- train(mpg ~ disp + wt, data=mtcars, method="lm", trControl=tc)
+```
+
+The model accuracy using the Multiple R Squared measure is:
+
+```{r echo=FALSE}
+summary(m)$adj.r.squared * 100
+```
+
+This is the percentage of the variation in MPG in the data explained by the weight and displacement values.
+
+Example and Conclusion
+========================================================
+
+Here is an examle prediction for a car weighing 2000lbs with a 250 cu. in. engine:
+
+```{r echo=FALSE}
+prediction <- predict(m$finalModel, newdata=data.frame(disp=250, wt=2))
+print(prediction)
+```
+I hope you find this model, and accompanying application, useful as you attempt to validate reported MPG claims
+from car manufacturers, or just having fun seeing the relationship between these values and the predicted MPG.

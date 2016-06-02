@@ -9,9 +9,11 @@
 
 library(shiny)
 library(calibrate)
+library(caret)
 
 # Create a linear model predicting MPG 
-m <- lm(mpg ~ disp + wt, data=mtcars)
+tc <- trainControl(method="LOOCV")
+m <- train(mpg ~ disp + wt, data=mtcars, method="lm", trControl=tc)$finalModel
 
 shinyServer(function(input, output) {
   
