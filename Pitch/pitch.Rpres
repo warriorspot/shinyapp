@@ -1,0 +1,35 @@
+Predicting car gas mileage
+========================================================
+author: Brennan Cleveland
+date: 6/2/2016
+autosize: true
+
+Car MPG : Truth and Lies
+========================================================
+
+With gas prices fluctuating significantly to as high as $3 USD per 
+gallon, gas mileage is a key feature for car purchasers.<br>
+
+However, are car manufacturers acurately reporting their vechicles MPG?<br>
+
+This app will help you find out!<br>
+
+I created a mathmatical model that will predict a car's MPG given it's weight (lbs.) and
+engine displacement (cu. inches).
+
+Methodology
+========================================================
+
+A linear regression model was created using the 
+```{r echo=FALSE}
+data <- mtcars[,c("mpg", "disp", "wt")]
+data$wt <- 1000 * data$wt
+head(data)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
