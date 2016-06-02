@@ -12,7 +12,6 @@ library(calibrate)
 
 m <- lm(mpg ~ disp + wt, data=mtcars)
 
-# Define server logic required to draw a histogram
 shinyServer(function(input, output) {
   out <- reactive({
     a <- as.character(round(predict(m, newdata=data.frame(disp=input$disp, wt=input$weight/1000)), 1))
@@ -20,8 +19,21 @@ shinyServer(function(input, output) {
   })
   
   output$plot <- renderPlot({
-    with(mtcars, plot(input$disp, input$weight, ylim=c(0, 6000), xlim=c(0,550), xlab="Displacement", ylab="Weight", main="Predicted MPG"))
-    textxy(input$disp, input$weight, out(), cex=1.0, offset = 0.8)
+    margins <- par()$mar
+    margins[3] = 2.0
+    par(cex=1.1, mar=margins)
+    
+    plot(
+      input$disp, input$weight, 
+      ylim=c(0, 6000), xlim=c(0,550), 
+      xlab="Displacement", ylab="Weight",
+      pch=19, col="blue", cex=2.0
+      )
+         
+    title(main="Predicted MPG", col.main="blue", cex.main = 1.8)
+    textxy(input$disp, input$weight, out(), cex=1.2, offset = 0.8)
+    segments(input$disp, 0, input$disp, input$weight, lty=3)
+    segments(0, input$weight, input$disp, input$weight, lty=3)
   })
   
 })

@@ -10,16 +10,19 @@
 library(shiny)
 
 shinyUI(fluidPage(
-  
-  verticalLayout(
-    titlePanel("Predict MPG by displacement and weight"),
-    mainPanel(
-      align="center",
-      plotOutput("plot")
-    ),
+  theme="custom.css",
+  titlePanel("Predict vehicle MPG by displacement and weight"),
+  br(),
+  HTML("<h4><b>Displacement:</b> Engine displacement in cubic inches</h4>"),
+  HTML("<h4><b>Weight:</b> Vehicle weight in pounds</h4>"),
+  br(),
+  sidebarLayout (
     sidebarPanel(
-      width=200,
       sliderInput("disp", "Displacement", 50, 500, value = 100, step = 5),
       sliderInput("weight", "Weight", 1000, 5000, value = 2000, step = 100)
-    ))
-))
+    ),
+    mainPanel(
+      plotOutput("plot")
+    )
+  ))
+)
