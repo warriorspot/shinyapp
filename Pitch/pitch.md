@@ -39,7 +39,7 @@ Valiant           18.1  225 3460
 Visuals
 ========================================================
 
-![plot of chunk unnamed-chunk-2](pitch-figure/unnamed-chunk-2-1.png)![plot of chunk unnamed-chunk-2](pitch-figure/unnamed-chunk-2-2.png)
+![plot of chunk unnamed-chunk-2](pitch-figure/unnamed-chunk-2-1.png)
 
 These plots demonstrate a clear relationship between weight, displacement, and MPG.
 
