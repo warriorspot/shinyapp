@@ -10,14 +10,19 @@
 library(shiny)
 library(calibrate)
 
+# Create a linear model predicting MPG 
 m <- lm(mpg ~ disp + wt, data=mtcars)
 
 shinyServer(function(input, output) {
+  
+  # Generate a prediction given the values set by the user
   out <- reactive({
-    a <- as.character(round(predict(m, newdata=data.frame(disp=input$disp, wt=input$weight/1000)), 1))
+    prediction <- predict(m, newdata=data.frame(disp=input$disp, wt=input$weight/1000))
+    a <- as.character(round(prediction, 1))
     paste(a, "MPG")
   })
   
+  # Show the prediction via a plot
   output$plot <- renderPlot({
     margins <- par()$mar
     margins[3] = 2.0
